@@ -27,7 +27,25 @@ class App extends Component {
 }
 
 class MenuBoard extends Component {
-  
+  renderRow()
+}
+
+class MenuRow extends Component {
+  render() {
+    return (
+      <tr>
+      </tr>
+    );
+  }
+}
+
+class MenuColumn extends Component {
+  render() {
+    return (
+      <td>
+      </td>
+    );
+  }
 }
 
 export default App;
