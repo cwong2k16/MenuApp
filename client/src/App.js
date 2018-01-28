@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom'
 import './App.css';
 import Admin from './adminComponent';
-import Menu from './menuComponent';
 
 class App extends Component {
   constructor(props) {
@@ -55,7 +54,7 @@ class MenuBoard extends Component {
         <p className="App-intro">
             <img style = {{borderRadius: "50px"}} src = 'preciousisland.jpg'></img>
         </p>
-        <table className = "Menu-board"> 
+        <table className = "Menu-board" id = "Lunch-board"> 
         <h1 style={{color: "darkred", width: "100%"}}> LUNCH (午餐)</h1>
         {this.props.value.map(function(attribute, index){
           var desc;
@@ -63,8 +62,7 @@ class MenuBoard extends Component {
             desc = attribute.Desc;
           }
           return <tr style = {{textAlign:"left"}}>
-            <th> {attribute.ID} </th>
-            <th> {attribute.Chinese} </th>
+            <th> {attribute.ID}. {attribute.Chinese} </th>
             <td>
             <tr> <th>{attribute.English}</th></tr>
             <tr style = {{fontSize: "small", maxWidth:"20px"}}> {desc} </tr>

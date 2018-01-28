@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "express": "^4.16.2",
+    "mongoose": "^4.13.10",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2"
   },
