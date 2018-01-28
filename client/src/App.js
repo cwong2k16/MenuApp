@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom'
 import './App.css';
 import Admin from './adminComponent';
-import Home from './homeComponent';
+import Menu from './menuComponent';
 
 class App extends Component {
   constructor(props) {
@@ -36,13 +36,9 @@ class App extends Component {
               </tr>
             </table>
           </header>
-          <p className="App-intro">
-            <img style = {{borderRadius: "50px"}} src = 'preciousisland.jpg'></img>
-          </p>
           <div>
-            {/* {this.renderMenuBoard()} */}
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" render={(props) => ( <MenuBoard value={this.state.data}/> )} />
               <Route path="/admin" component={Admin} />
             </Switch>
           </div>
@@ -50,32 +46,34 @@ class App extends Component {
       </Router>
     );
   }
-  renderMenuBoard() {
-    return <MenuBoard value = {this.state.data}/>
-  }
 }
 
 class MenuBoard extends Component {
   render() {
     return(
-      <table className = "Menu-board"> 
-      <h1 style={{color: "darkred", width: "100%"}}> LUNCH (午餐)</h1>
-       {this.props.value.map(function(attribute, index){
-         var desc;
-         if(attribute.Desc){
-           desc = attribute.Desc;
-         }
-         return <tr style = {{textAlign:"left"}}>
-          <th> {attribute.ID} </th>
-          <th> {attribute.Chinese} </th>
-          <td>
-          <tr> <th>{attribute.English}</th></tr>
-          <tr style = {{fontSize: "small", maxWidth:"20px"}}> {desc} </tr>
-          </td>
-          <td> {attribute.Price} </td>
-         </tr>
-        })}
-      </table>
+      <div>
+        <p className="App-intro">
+            <img style = {{borderRadius: "50px"}} src = 'preciousisland.jpg'></img>
+        </p>
+        <table className = "Menu-board"> 
+        <h1 style={{color: "darkred", width: "100%"}}> LUNCH (午餐)</h1>
+        {this.props.value.map(function(attribute, index){
+          var desc;
+          if(attribute.Desc){
+            desc = attribute.Desc;
+          }
+          return <tr style = {{textAlign:"left"}}>
+            <th> {attribute.ID} </th>
+            <th> {attribute.Chinese} </th>
+            <td>
+            <tr> <th>{attribute.English}</th></tr>
+            <tr style = {{fontSize: "small", maxWidth:"20px"}}> {desc} </tr>
+            </td>
+            <td> {attribute.Price} </td>
+          </tr>
+          })}
+        </table>
+      </div>
     );
   }
 }
