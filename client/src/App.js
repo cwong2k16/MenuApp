@@ -5,7 +5,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [{"Chinese": "牛肉和西兰花", "English": "Beef with Broccoli", "Price":"$8.50"}, 
+      data: [{"Chinese": "牛肉和西兰花", "English": "Beef with", "Desc":"(Beef, chicken or roast pork)", "Price":"$8.50"}, 
              {"Chinese":"胡椒牛排", "English":"Pepper Steak", "Price":"$8.50"}]
     };
   }
@@ -44,9 +44,16 @@ class MenuBoard extends Component {
     return(
       <table className = "Menu-board"> 
        {this.props.value.map(function(attribute, index){
+         var desc;
+         if(attribute.Desc){
+           desc = attribute.Desc;
+         }
          return <tr style = {{textAlign:"left"}}>
-          <td> {attribute.Chinese} </td>
-          <td> {attribute.English} </td>
+          <th> {attribute.Chinese} </th>
+          <td>
+          <tr> <th>{attribute.English}</th></tr>
+          <tr style = {{fontSize: "small"}}> {desc} </tr>
+          </td>
           <td> {attribute.Price} </td>
          </tr>
         })}
