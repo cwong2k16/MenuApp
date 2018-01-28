@@ -6,8 +6,17 @@ var keys = require('./config/keys');
 
 mongoose.connect(keys.mongodb.dbURL);
 
-app.get('/menu', (req, res) => {
-  res.send({ express: 'Menu' });
+var model = ('./models/MenuModel');
+
+app.get('/', (req, res) => {
+  model.find({}, (err, data)=>{
+    if(err){
+      throw err;
+    }
+    else if(data){
+      res.send(data);
+    }
+  })
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
