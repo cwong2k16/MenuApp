@@ -5,8 +5,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [{"Chinese": "牛肉和西兰花", "English": "Beef with", "Desc":"(Beef, chicken or roast pork)", "Price":"$8.50"}, 
-             {"Chinese":"胡椒牛排", "English":"Pepper Steak", "Price":"$8.50"}]
+      data: [{"ID":"L1", "Chinese": "牛肉和西兰花", "English": "Beef with", "Desc":"(Beef, chicken or roast pork)", "Price":"$8.50"}, 
+             {"ID":"L2", "Chinese":"胡椒牛排", "English":"Pepper Steak", "Price":"$8.50"},
+             {"ID":"L15", "Chinese":"捞面", "English":"Lo Mein", "Desc":"(Chicken, beef, roast pork, vegetable, or shrimp)", "Price":"$8.50"}]
     };
   }
   render() {
@@ -43,16 +44,18 @@ class MenuBoard extends Component {
   render() {
     return(
       <table className = "Menu-board"> 
+      <h1 style={{color: "darkred", width: "100%"}}> LUNCH (午餐)</h1>
        {this.props.value.map(function(attribute, index){
          var desc;
          if(attribute.Desc){
            desc = attribute.Desc;
          }
          return <tr style = {{textAlign:"left"}}>
+          <th> {attribute.ID} </th>
           <th> {attribute.Chinese} </th>
           <td>
           <tr> <th>{attribute.English}</th></tr>
-          <tr style = {{fontSize: "small"}}> {desc} </tr>
+          <tr style = {{fontSize: "small", maxWidth:"20px"}}> {desc} </tr>
           </td>
           <td> {attribute.Price} </td>
          </tr>
