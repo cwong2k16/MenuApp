@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from 'react-router-dom'
 import './App.css';
+import Admin from './adminComponent';
+import Home from './homeComponent';
 
 class App extends Component {
   constructor(props) {
@@ -12,27 +21,33 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">PRECIOUS ISLAND TEA SHOP MENU</h1>
-          <table className = 'App-table' style = {{textAlign:"left"}}>
-            <tr>
-              <td>366 New Dorp Lane Staten Island, NY, 10306</td>
-              <td style = {{textAlign:"right"}}> Sunday - Monday</td>
-            </tr>
-            <tr>
-              <td>718-878-5504</td>
-              <td style = {{textAlign:"right"}}> 10am - 10pm</td>
-            </tr>
-          </table>
-        </header>
-        <p className="App-intro">
-          <img style = {{borderRadius: "50px"}} src = 'preciousisland.jpg'></img>
-        </p>
-        <div>
-          {this.renderMenuBoard()}
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            <h1 className="App-title">PRECIOUS ISLAND TEA SHOP MENU</h1>
+            <table className = 'App-table' style = {{textAlign:"left"}}>
+              <tr>
+                <td>366 New Dorp Lane Staten Island, NY, 10306</td>
+                <td style = {{textAlign:"right"}}> Sunday - Monday</td>
+              </tr>
+              <tr>
+                <td>718-878-5504</td>
+                <td style = {{textAlign:"right"}}> 10am - 10pm</td>
+              </tr>
+            </table>
+          </header>
+          <p className="App-intro">
+            <img style = {{borderRadius: "50px"}} src = 'preciousisland.jpg'></img>
+          </p>
+          <div>
+            {/* {this.renderMenuBoard()} */}
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/admin" component={Admin} />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
   renderMenuBoard() {
