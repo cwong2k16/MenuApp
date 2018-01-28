@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [["牛肉和西兰花", "Beef with Broccoli", "$8.50"], ["胡椒牛排", "Pepper Steak", "$8.50"]]
+    };
+  }
   render() {
     return (
       <div className="App">
@@ -21,29 +27,30 @@ class App extends Component {
         <p className="App-intro">
           <img style = {{borderRadius: "50px"}} src = 'preciousisland.jpg'></img>
         </p>
+        <div>
+          {this.renderMenuBoard()}
+        </div>
       </div>
     );
+  }
+  renderMenuBoard() {
+    return <MenuBoard value = {this.state.data}/>
   }
 }
 
 class MenuBoard extends Component {
-  renderRow()
-}
-
-class MenuRow extends Component {
   render() {
-    return (
-      <tr>
-      </tr>
-    );
-  }
-}
-
-class MenuColumn extends Component {
-  render() {
-    return (
-      <td>
-      </td>
+    return(
+      <table className = "Menu-board"> 
+       {this.props.value.map(function(attribute, index){
+         return <tr style = {{textAlign:"left"}}>
+         {attribute.map(function(attr, i){
+           return <td key = {i}>{attr} </td>
+         })}
+         </tr>
+        //  return <tr key={index}>{attribute}</tr>
+       })}
+      </table>
     );
   }
 }
