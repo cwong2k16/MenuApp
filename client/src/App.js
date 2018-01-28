@@ -5,7 +5,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [["牛肉和西兰花", "Beef with Broccoli", "$8.50"], ["胡椒牛排", "Pepper Steak", "$8.50"]]
+      data: [{"Chinese": "牛肉和西兰花", "English": "Beef with Broccoli", "Price":"$8.50"}, 
+             {"Chinese":"胡椒牛排", "English":"Pepper Steak", "Price":"$8.50"}]
     };
   }
   render() {
@@ -44,12 +45,11 @@ class MenuBoard extends Component {
       <table className = "Menu-board"> 
        {this.props.value.map(function(attribute, index){
          return <tr style = {{textAlign:"left"}}>
-         {attribute.map(function(attr, i){
-           return <td key = {i}>{attr} </td>
-         })}
+          <td> {attribute.Chinese} </td>
+          <td> {attribute.English} </td>
+          <td> {attribute.Price} </td>
          </tr>
-        //  return <tr key={index}>{attribute}</tr>
-       })}
+        })}
       </table>
     );
   }
