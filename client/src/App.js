@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -9,15 +9,39 @@ import {
 import './App.css';
 import Admin from './adminComponent';
 
+// class App extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       data: [{"ID":"L1", "Chinese": "牛肉和西兰花", "English": "Beef with", "Desc":"(Beef, chicken or roast pork)", "Price":"$8.50"}, 
+//              {"ID":"L2", "Chinese":"胡椒牛排", "English":"Pepper Steak", "Price":"$8.50"},
+//              {"ID":"L15", "Chinese":"捞面", "English":"Lo Mein", "Desc":"(Chicken, beef, roast pork, vegetable, or shrimp)", "Price":"$8.50"}]
+//     };
+//   }
+import React, { Component } from 'react';
+
+import './App.css';
+
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [{"ID":"L1", "Chinese": "牛肉和西兰花", "English": "Beef with", "Desc":"(Beef, chicken or roast pork)", "Price":"$8.50"}, 
-             {"ID":"L2", "Chinese":"胡椒牛排", "English":"Pepper Steak", "Price":"$8.50"},
-             {"ID":"L15", "Chinese":"捞面", "English":"Lo Mein", "Desc":"(Chicken, beef, roast pork, vegetable, or shrimp)", "Price":"$8.50"}]
-    };
+  state = {
+    response: '',
+    loading: true
+  };
+
+  componentDidMount() {
+    this.callApi()
+      .then(res => this.setState({ response: JSON.stringify(res), loading: false }))
+      .catch(err => console.log(err));
   }
+
+  callApi = async () => {
+    const response = await fetch('/api/menu');
+    const body = await response.json();
+
+    if (response.status !== 200) throw Error(body.message);
+
+    return body;
+  };
   render() {
     return (
       <Router>
@@ -37,7 +61,7 @@ class App extends Component {
           </header>
           <div>
             <Switch>
-              <Route exact path="/" render={(props) => ( <MenuBoard value={this.state.data}/> )} />
+              <Route exact path="/" render={(props) => ( <MenuBoard value={this.state.response}/> )} />
               <Route path="/admin" component={Admin} />
             </Switch>
           </div>
@@ -56,7 +80,8 @@ class MenuBoard extends Component {
         </p>
         <table className = "Menu-board" id = "Lunch-board"> 
         <h1 style={{color: "darkred", width: "100%"}}> LUNCH (午餐)</h1>
-        {this.props.value.map(function(attribute, index){
+        <div>{this.props.value}</div>
+        {/* {this.props.value.map(function(attribute, index){
           var desc;
           if(attribute.Desc){
             desc = attribute.Desc;
@@ -69,7 +94,7 @@ class MenuBoard extends Component {
             </td>
             <td> {attribute.Price} </td>
           </tr>
-          })}
+          })} */}
         </table>
       </div>
     );

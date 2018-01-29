@@ -4,11 +4,9 @@ const app = express();
 const port = 5000;
 var keys = require('./config/keys');
 
-mongoose.connect(keys.mongodb.dbURL);
+var model = require('./models/MenuModel');
 
-var model = ('./models/MenuModel');
-
-app.get('/', (req, res) => {
+app.get('/api/menu', (req, res) => {
   model.find({}, (err, data)=>{
     if(err){
       throw err;
@@ -16,7 +14,11 @@ app.get('/', (req, res) => {
     else if(data){
       res.send(data);
     }
-  })
+    else{
+      res.send('Database does not exist');
+    }
+  });
+  res.send([{"ID":"L1", "Chinese": "牛肉和西兰花", "English": "Beef with", "Desc":"(Beef, chicken or roast pork)", "Price":"$8.50"}]);
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
