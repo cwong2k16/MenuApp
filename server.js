@@ -21,7 +21,6 @@ app.get('/api/menu', (req, res) => {
 });
 
 app.post('/api/menu', (req, res)=>{
-  res.send("aaa");
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

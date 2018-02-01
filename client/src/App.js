@@ -16,10 +16,12 @@ class App extends Component {
       data: []
     };
   }
+  
   componentDidMount() {
     this.callApi()
       .then(res => this.setState({data: res}))
       .catch(err => console.log(err));
+    this.postApi()
   }
 
   callApi = async () => {
@@ -30,6 +32,15 @@ class App extends Component {
 
     return body;
   };
+
+  postApi = async() =>{
+    fetch('/api/menu',
+    {
+      method: POST, 
+      data: JSON.stringify({foo:'bar'})
+    });
+  }
+
   render() {
     return (
       <Router>
