@@ -31,7 +31,24 @@ app.get('/api/menu', (req, res) => {
 });
 
 app.post('/data/new', (req, res) => {
-  console.log(req.body);
+  menus.find({}, (err, data)=>{
+    if(err) throw err;
+    else if(!data){
+      console.log("no data!");
+    }
+    else{
+      var item = new menus({
+        ID:req.body.ID,
+        Chinese: req.body.Chinese,
+        English: req.body.English,
+        Desc: req.body.Desc,
+        Price: req.body.Price
+      });
+      item.save(function(err){
+        if(err) throw err
+      })
+    }
+  });
   res.send('Success');
 });
 
