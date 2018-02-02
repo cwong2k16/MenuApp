@@ -31,7 +31,7 @@ app.get('/api/menu', (req, res) => {
 });
 
 app.post('/data/new', (req, res) => {
-  console.log(req);
+  console.log(req.body);
   res.send('Success');
 });
 

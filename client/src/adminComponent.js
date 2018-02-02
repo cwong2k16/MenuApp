@@ -1,9 +1,7 @@
 /* EXTREMELY HELPFUL: https://stackoverflow.com/questions/46316600/cannot-post-data-from-react-js-to-node-js?answertab=active#tab-top
 *  Was lost on how to send POST requests from React to Express app; link above helped a lot since it's set up the same way as my own code
 */
-
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 class Admin extends Component {
     constructor() {
@@ -12,7 +10,6 @@ class Admin extends Component {
     }
     handleSubmit(e){
         e.preventDefault();
-
         var id = document.getElementById('ID').value;
         var chinese = document.getElementById('Chinese').value;
         var english = document.getElementById('English').value;
@@ -20,19 +17,18 @@ class Admin extends Component {
         var price = document.getElementById('Price').value;
 
         fetch("http://localhost:5000/data/new", {
-            mode: "no-cors",
-            method: "post",
-            headers: {
-                'Content-Type': 'application/json'
+            method: "POST",
+            headers: {    
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
             },
-            body: 'hello' 
-            // JSON.stringify({
-            //     ID: "hello",
-            //     // Chinese: chinese,
-            //     // English: english,
-            //     // Desc: desc,
-            //     // Price: price
-            // })
+            body: JSON.stringify({
+                ID: id,
+                Chinese: chinese,
+                English: english,
+                Desc: desc,
+                Price: price
+            }),
         })
         .then(res => console.log("Response: " + res))
         .catch(err => console.log(err));
