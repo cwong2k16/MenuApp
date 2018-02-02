@@ -21,7 +21,6 @@ class App extends Component {
     this.callApi()
       .then(res => this.setState({data: res}))
       .catch(err => console.log(err));
-    this.postApi()
   }
 
   callApi = async () => {
@@ -32,14 +31,6 @@ class App extends Component {
 
     return body;
   };
-
-  postApi = async() =>{
-    fetch('/api/menu',
-    {
-      method: POST, 
-      data: JSON.stringify({foo:'bar'})
-    });
-  }
 
   render() {
     return (
@@ -61,7 +52,7 @@ class App extends Component {
           <div>
             <Switch>
               <Route exact path="/" render={(props) => ( <MenuBoard value={this.state.data}/> )} />
-              <Route path="/admin" component={Admin} />
+              <Route path="/" component={Admin} />
             </Switch>
           </div>
         </div>
