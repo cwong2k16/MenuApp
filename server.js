@@ -31,8 +31,7 @@ app.get('/api/menu', (req, res) => {
 });
 
 app.post('/data/new', (req, res) => {
-  var player = req.body;
-  console.log('ok ' + player);
+  console.log(req);
   res.send('Success');
 });
 

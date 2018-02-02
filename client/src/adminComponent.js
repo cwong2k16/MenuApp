@@ -8,20 +8,31 @@ import ReactDOM from 'react-dom';
 class Admin extends Component {
     constructor() {
         super();
+        this.state = {};
     }
     handleSubmit(e){
         e.preventDefault();
+
+        var id = document.getElementById('ID').value;
+        var chinese = document.getElementById('Chinese').value;
+        var english = document.getElementById('English').value;
+        var desc = document.getElementById('Desc').value;
+        var price = document.getElementById('Price').value;
+
         fetch("http://localhost:5000/data/new", {
             mode: "no-cors",
             method: "post",
             headers: {
-                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                name: 'Chris',
-                password: 'password'
-            })
+            body: 'hello' 
+            // JSON.stringify({
+            //     ID: "hello",
+            //     // Chinese: chinese,
+            //     // English: english,
+            //     // Desc: desc,
+            //     // Price: price
+            // })
         })
         .then(res => console.log("Response: " + res))
         .catch(err => console.log(err));
@@ -33,23 +44,23 @@ class Admin extends Component {
                     <table style = {{width: "100%", paddingTop:"5%"}}>
                     <tr>
                         <th style={{textAlign:"right"}}><label for = "ID">ID: </label></th>
-                        <td style={{textAlign:"left"}}><input name = "ID"></input></td>
+                        <td style={{textAlign:"left"}}><input id = "ID" name = "ID"></input></td>
                     </tr>
                     <tr>
                         <th style={{textAlign:"right"}}><label for = "Chinese">Chinese: </label></th>
-                        <td style={{textAlign:"left"}}><input name = "Chinese"></input></td>
+                        <td style={{textAlign:"left"}}><input id = "Chinese" value = {this.state.Chinese} name = "Chinese"></input></td>
                     </tr>
                     <tr>
                         <th style={{textAlign:"right"}}><label for = "English">English: </label></th>
-                        <td style={{textAlign:"left"}}><input name = "English"></input></td>
+                        <td style={{textAlign:"left"}}><input id = "English" value = {this.state.English} name = "English"></input></td>
                     </tr>
                     <tr>
                         <th style={{textAlign:"right"}}><label for = "Desc">Desc: </label></th>
-                        <td style={{textAlign:"left"}}><input name = "Desc"></input></td>
+                        <td style={{textAlign:"left"}}><input id = "Desc" value = {this.state.Desc} name = "Desc"></input></td>
                     </tr>
                     <tr>
                         <th style={{textAlign:"right"}}><label for = "Price">Price: </label></th>
-                        <td style={{textAlign:"left"}}><input name = "Price"></input></td>
+                        <td style={{textAlign:"left"}}><input id = "Price" value = {this.state.Price} name = "Price"></input></td>
                     </tr>
                     <tr>
                         <td style={{textAlign:"right"}}><input value = "Submit" type = "submit" onClick={this.handleSubmit.bind(this)}/></td>
@@ -62,44 +73,3 @@ class Admin extends Component {
 }
 
 export default Admin;
-
-// import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
-
-// class Member extends Component {
-//   constructor() {
-//     super();
-//     this.state = { player: {} };
-//   }
-
-//   handleSubmit(e) {
-//     e.preventDefault();
-//     fetch('http://localhost:4000/player', {
-//         mode: 'no-cors',
-//         method: 'post',
-//         headers: {
-//             "Content-Type": "text/plain"
-//         },
-//         body: JSON.stringify({
-//           number: 123,
-//           name: "John",
-//           position: "Andrew"
-//         })
-//     }).then(function(response) {
-//       console.log(response);
-//     }).catch(function(error) {
-//       console.log('Request failed', error)
-//     });    
-//   }
-
-//   render() {
-//     return (
-//       <div className="member-page">
-//         <form>
-//           <input type="submit" onClick={this.handleSubmit.bind(this)} />
-//         </form>
-//       </div>
-//     )
-//   }
-// }
-// export default Member;
